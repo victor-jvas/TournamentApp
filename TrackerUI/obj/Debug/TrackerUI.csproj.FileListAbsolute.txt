@@ -1,0 +1,15 @@
+D:\Dev\GitRepos\TournamentApp\TrackerUI\bin\Debug\TrackerUI.exe.config
+D:\Dev\GitRepos\TournamentApp\TrackerUI\bin\Debug\TrackerUI.exe
+D:\Dev\GitRepos\TournamentApp\TrackerUI\bin\Debug\TrackerUI.pdb
+D:\Dev\GitRepos\TournamentApp\TrackerUI\bin\Debug\TrackerLibrary.dll
+D:\Dev\GitRepos\TournamentApp\TrackerUI\bin\Debug\Dapper.dll
+D:\Dev\GitRepos\TournamentApp\TrackerUI\bin\Debug\TrackerLibrary.pdb
+D:\Dev\GitRepos\TournamentApp\TrackerUI\bin\Debug\Dapper.xml
+D:\Dev\GitRepos\TournamentApp\TrackerUI\obj\Debug\TrackerUI.csprojAssemblyReference.cache
+D:\Dev\GitRepos\TournamentApp\TrackerUI\obj\Debug\TrackerUI.CreateTournamentForm.resources
+D:\Dev\GitRepos\TournamentApp\TrackerUI\obj\Debug\TrackerUI.Properties.Resources.resources
+D:\Dev\GitRepos\TournamentApp\TrackerUI\obj\Debug\TrackerUI.csproj.GenerateResource.cache
+D:\Dev\GitRepos\TournamentApp\TrackerUI\obj\Debug\TrackerUI.csproj.CoreCompileInputs.cache
+D:\Dev\GitRepos\TournamentApp\TrackerUI\obj\Debug\TrackerUI.csproj.CopyComplete
+D:\Dev\GitRepos\TournamentApp\TrackerUI\obj\Debug\TrackerUI.exe
+D:\Dev\GitRepos\TournamentApp\TrackerUI\obj\Debug\TrackerUI.pdb

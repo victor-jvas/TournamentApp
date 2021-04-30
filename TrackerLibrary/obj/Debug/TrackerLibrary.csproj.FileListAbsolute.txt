@@ -1,0 +1,11 @@
+D:\Dev\GitRepos\TournamentApp\TrackerLibrary\bin\Debug\TrackerLibrary.dll
+D:\Dev\GitRepos\TournamentApp\TrackerLibrary\bin\Debug\TrackerLibrary.pdb
+D:\Dev\GitRepos\TournamentApp\TrackerLibrary\bin\Debug\Dapper.dll
+D:\Dev\GitRepos\TournamentApp\TrackerLibrary\bin\Debug\System.Data.SqlClient.dll
+D:\Dev\GitRepos\TournamentApp\TrackerLibrary\bin\Debug\Dapper.xml
+D:\Dev\GitRepos\TournamentApp\TrackerLibrary\bin\Debug\System.Data.SqlClient.xml
+D:\Dev\GitRepos\TournamentApp\TrackerLibrary\obj\Debug\TrackerLibrary.csprojAssemblyReference.cache
+D:\Dev\GitRepos\TournamentApp\TrackerLibrary\obj\Debug\TrackerLibrary.csproj.CoreCompileInputs.cache
+D:\Dev\GitRepos\TournamentApp\TrackerLibrary\obj\Debug\TrackerLibrary.csproj.CopyComplete
+D:\Dev\GitRepos\TournamentApp\TrackerLibrary\obj\Debug\TrackerLibrary.dll
+D:\Dev\GitRepos\TournamentApp\TrackerLibrary\obj\Debug\TrackerLibrary.pdb
