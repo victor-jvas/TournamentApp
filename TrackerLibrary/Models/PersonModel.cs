@@ -2,6 +2,15 @@
 {
     public class PersonModel
     {
+        public PersonModel(string firstNameValue, string lastNameValue, string emailValue, string cellphoneValue)
+        {
+            FirstName = firstNameValue;
+            LastName = lastNameValue;
+            EmailAddress = emailValue;
+            CellPhoneNumber = cellphoneValue;
+        }
+
+        public int Id { get; set; }
         public string FirstName { get; set; }
 
         public string LastName { get; set; }

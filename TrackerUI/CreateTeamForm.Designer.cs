@@ -36,15 +36,15 @@ namespace TrackerUI
             this.selectTeamMemberDropDown = new System.Windows.Forms.ComboBox();
             this.selectTeamMemberLabel = new System.Windows.Forms.Label();
             this.addNewMemberBox = new System.Windows.Forms.GroupBox();
-            this.firstNameValue = new System.Windows.Forms.TextBox();
-            this.firstNameLabel = new System.Windows.Forms.Label();
-            this.lastNameValue = new System.Windows.Forms.TextBox();
-            this.lastNameLabel = new System.Windows.Forms.Label();
+            this.createMemberButton = new System.Windows.Forms.Button();
             this.cellphoneValue = new System.Windows.Forms.TextBox();
             this.cellphoneLabel = new System.Windows.Forms.Label();
             this.emailValue = new System.Windows.Forms.TextBox();
             this.emailLabel = new System.Windows.Forms.Label();
-            this.createMemberButton = new System.Windows.Forms.Button();
+            this.lastNameValue = new System.Windows.Forms.TextBox();
+            this.lastNameLabel = new System.Windows.Forms.Label();
+            this.firstNameValue = new System.Windows.Forms.TextBox();
+            this.firstNameLabel = new System.Windows.Forms.Label();
             this.teamMembersListBox = new System.Windows.Forms.ListBox();
             this.deleteSelectedMemberButton = new System.Windows.Forms.Button();
             this.createTeamButton = new System.Windows.Forms.Button();
@@ -61,7 +61,7 @@ namespace TrackerUI
             // teamNameLabel
             // 
             this.teamNameLabel.AutoSize = true;
-            this.teamNameLabel.Font = new System.Drawing.Font("Microsoft YaHei UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.teamNameLabel.Font = new System.Drawing.Font("Microsoft YaHei UI", 18F);
             this.teamNameLabel.ForeColor = System.Drawing.Color.Coral;
             this.teamNameLabel.Location = new System.Drawing.Point(23, 57);
             this.teamNameLabel.Name = "teamNameLabel";
@@ -72,7 +72,7 @@ namespace TrackerUI
             // 
             // headerLabel
             // 
-            this.headerLabel.Font = new System.Drawing.Font("Microsoft YaHei UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.headerLabel.Font = new System.Drawing.Font("Microsoft YaHei UI", 18F, System.Drawing.FontStyle.Bold);
             this.headerLabel.ForeColor = System.Drawing.Color.Coral;
             this.headerLabel.Location = new System.Drawing.Point(12, 9);
             this.headerLabel.Name = "headerLabel";
@@ -84,10 +84,10 @@ namespace TrackerUI
             // 
             this.addTeamMemberButton.AutoSize = true;
             this.addTeamMemberButton.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
-            this.addTeamMemberButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.addTeamMemberButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int) (((byte) (64)))), ((int) (((byte) (64)))), ((int) (((byte) (64)))));
             this.addTeamMemberButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gainsboro;
             this.addTeamMemberButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.addTeamMemberButton.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.addTeamMemberButton.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F);
             this.addTeamMemberButton.ForeColor = System.Drawing.Color.Coral;
             this.addTeamMemberButton.Location = new System.Drawing.Point(114, 199);
             this.addTeamMemberButton.Name = "addTeamMemberButton";
@@ -107,7 +107,7 @@ namespace TrackerUI
             // selectTeamMemberLabel
             // 
             this.selectTeamMemberLabel.AutoSize = true;
-            this.selectTeamMemberLabel.Font = new System.Drawing.Font("Microsoft YaHei UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.selectTeamMemberLabel.Font = new System.Drawing.Font("Microsoft YaHei UI", 15.75F);
             this.selectTeamMemberLabel.ForeColor = System.Drawing.Color.Coral;
             this.selectTeamMemberLabel.Location = new System.Drawing.Point(23, 129);
             this.selectTeamMemberLabel.Name = "selectTeamMemberLabel";
@@ -127,7 +127,7 @@ namespace TrackerUI
             this.addNewMemberBox.Controls.Add(this.lastNameLabel);
             this.addNewMemberBox.Controls.Add(this.firstNameValue);
             this.addNewMemberBox.Controls.Add(this.firstNameLabel);
-            this.addNewMemberBox.Font = new System.Drawing.Font("Microsoft YaHei UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.addNewMemberBox.Font = new System.Drawing.Font("Microsoft YaHei UI", 14.25F);
             this.addNewMemberBox.ForeColor = System.Drawing.Color.Coral;
             this.addNewMemberBox.Location = new System.Drawing.Point(32, 236);
             this.addNewMemberBox.Name = "addNewMemberBox";
@@ -136,44 +136,22 @@ namespace TrackerUI
             this.addNewMemberBox.TabStop = false;
             this.addNewMemberBox.Text = "Add New Member";
             // 
-            // firstNameValue
+            // createMemberButton
             // 
-            this.firstNameValue.Location = new System.Drawing.Point(134, 36);
-            this.firstNameValue.Name = "firstNameValue";
-            this.firstNameValue.Size = new System.Drawing.Size(145, 32);
-            this.firstNameValue.TabIndex = 6;
-            
-            // 
-            // firstNameLabel
-            // 
-            this.firstNameLabel.AutoSize = true;
-            this.firstNameLabel.Font = new System.Drawing.Font("Microsoft YaHei UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.firstNameLabel.ForeColor = System.Drawing.Color.Coral;
-            this.firstNameLabel.Location = new System.Drawing.Point(6, 40);
-            this.firstNameLabel.Name = "firstNameLabel";
-            this.firstNameLabel.Size = new System.Drawing.Size(122, 28);
-            this.firstNameLabel.TabIndex = 5;
-            this.firstNameLabel.Text = "First Name";
-            this.firstNameLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // lastNameValue
-            // 
-            this.lastNameValue.Location = new System.Drawing.Point(134, 74);
-            this.lastNameValue.Name = "lastNameValue";
-            this.lastNameValue.Size = new System.Drawing.Size(145, 32);
-            this.lastNameValue.TabIndex = 8;
-            // 
-            // lastNameLabel
-            // 
-            this.lastNameLabel.AutoSize = true;
-            this.lastNameLabel.Font = new System.Drawing.Font("Microsoft YaHei UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lastNameLabel.ForeColor = System.Drawing.Color.Coral;
-            this.lastNameLabel.Location = new System.Drawing.Point(6, 78);
-            this.lastNameLabel.Name = "lastNameLabel";
-            this.lastNameLabel.Size = new System.Drawing.Size(120, 28);
-            this.lastNameLabel.TabIndex = 7;
-            this.lastNameLabel.Text = "Last Name";
-            this.lastNameLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.createMemberButton.AutoSize = true;
+            this.createMemberButton.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
+            this.createMemberButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int) (((byte) (64)))), ((int) (((byte) (64)))), ((int) (((byte) (64)))));
+            this.createMemberButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gainsboro;
+            this.createMemberButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.createMemberButton.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F);
+            this.createMemberButton.ForeColor = System.Drawing.Color.Coral;
+            this.createMemberButton.Location = new System.Drawing.Point(78, 194);
+            this.createMemberButton.Name = "createMemberButton";
+            this.createMemberButton.Size = new System.Drawing.Size(142, 33);
+            this.createMemberButton.TabIndex = 14;
+            this.createMemberButton.Text = "Create Member";
+            this.createMemberButton.UseVisualStyleBackColor = true;
+            this.createMemberButton.Click += new System.EventHandler(this.createMemberButton_Click);
             // 
             // cellphoneValue
             // 
@@ -185,7 +163,7 @@ namespace TrackerUI
             // cellphoneLabel
             // 
             this.cellphoneLabel.AutoSize = true;
-            this.cellphoneLabel.Font = new System.Drawing.Font("Microsoft YaHei UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.cellphoneLabel.Font = new System.Drawing.Font("Microsoft YaHei UI", 15.75F);
             this.cellphoneLabel.ForeColor = System.Drawing.Color.Coral;
             this.cellphoneLabel.Location = new System.Drawing.Point(6, 153);
             this.cellphoneLabel.Name = "cellphoneLabel";
@@ -204,7 +182,7 @@ namespace TrackerUI
             // emailLabel
             // 
             this.emailLabel.AutoSize = true;
-            this.emailLabel.Font = new System.Drawing.Font("Microsoft YaHei UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.emailLabel.Font = new System.Drawing.Font("Microsoft YaHei UI", 15.75F);
             this.emailLabel.ForeColor = System.Drawing.Color.Coral;
             this.emailLabel.Location = new System.Drawing.Point(6, 115);
             this.emailLabel.Name = "emailLabel";
@@ -213,21 +191,43 @@ namespace TrackerUI
             this.emailLabel.Text = "Email";
             this.emailLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // createMemberButton
+            // lastNameValue
             // 
-            this.createMemberButton.AutoSize = true;
-            this.createMemberButton.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
-            this.createMemberButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.createMemberButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gainsboro;
-            this.createMemberButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.createMemberButton.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.createMemberButton.ForeColor = System.Drawing.Color.Coral;
-            this.createMemberButton.Location = new System.Drawing.Point(78, 194);
-            this.createMemberButton.Name = "createMemberButton";
-            this.createMemberButton.Size = new System.Drawing.Size(142, 33);
-            this.createMemberButton.TabIndex = 14;
-            this.createMemberButton.Text = "Create Member";
-            this.createMemberButton.UseVisualStyleBackColor = true;
+            this.lastNameValue.Location = new System.Drawing.Point(134, 74);
+            this.lastNameValue.Name = "lastNameValue";
+            this.lastNameValue.Size = new System.Drawing.Size(145, 32);
+            this.lastNameValue.TabIndex = 8;
+            // 
+            // lastNameLabel
+            // 
+            this.lastNameLabel.AutoSize = true;
+            this.lastNameLabel.Font = new System.Drawing.Font("Microsoft YaHei UI", 15.75F);
+            this.lastNameLabel.ForeColor = System.Drawing.Color.Coral;
+            this.lastNameLabel.Location = new System.Drawing.Point(6, 78);
+            this.lastNameLabel.Name = "lastNameLabel";
+            this.lastNameLabel.Size = new System.Drawing.Size(120, 28);
+            this.lastNameLabel.TabIndex = 7;
+            this.lastNameLabel.Text = "Last Name";
+            this.lastNameLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // firstNameValue
+            // 
+            this.firstNameValue.Location = new System.Drawing.Point(134, 36);
+            this.firstNameValue.Name = "firstNameValue";
+            this.firstNameValue.Size = new System.Drawing.Size(145, 32);
+            this.firstNameValue.TabIndex = 6;
+            // 
+            // firstNameLabel
+            // 
+            this.firstNameLabel.AutoSize = true;
+            this.firstNameLabel.Font = new System.Drawing.Font("Microsoft YaHei UI", 15.75F);
+            this.firstNameLabel.ForeColor = System.Drawing.Color.Coral;
+            this.firstNameLabel.Location = new System.Drawing.Point(6, 40);
+            this.firstNameLabel.Name = "firstNameLabel";
+            this.firstNameLabel.Size = new System.Drawing.Size(122, 28);
+            this.firstNameLabel.TabIndex = 5;
+            this.firstNameLabel.Text = "First Name";
+            this.firstNameLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // teamMembersListBox
             // 
@@ -242,10 +242,10 @@ namespace TrackerUI
             // 
             this.deleteSelectedMemberButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.deleteSelectedMemberButton.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
-            this.deleteSelectedMemberButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.deleteSelectedMemberButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int) (((byte) (64)))), ((int) (((byte) (64)))), ((int) (((byte) (64)))));
             this.deleteSelectedMemberButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gainsboro;
             this.deleteSelectedMemberButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.deleteSelectedMemberButton.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.deleteSelectedMemberButton.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F);
             this.deleteSelectedMemberButton.ForeColor = System.Drawing.Color.Coral;
             this.deleteSelectedMemberButton.Location = new System.Drawing.Point(597, 260);
             this.deleteSelectedMemberButton.Name = "deleteSelectedMemberButton";
@@ -258,10 +258,10 @@ namespace TrackerUI
             // 
             this.createTeamButton.AutoSize = true;
             this.createTeamButton.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
-            this.createTeamButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.createTeamButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int) (((byte) (64)))), ((int) (((byte) (64)))), ((int) (((byte) (64)))));
             this.createTeamButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gainsboro;
             this.createTeamButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.createTeamButton.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.createTeamButton.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F);
             this.createTeamButton.ForeColor = System.Drawing.Color.Coral;
             this.createTeamButton.Location = new System.Drawing.Point(298, 506);
             this.createTeamButton.Name = "createTeamButton";
@@ -286,14 +286,13 @@ namespace TrackerUI
             this.Controls.Add(this.teamNameValue);
             this.Controls.Add(this.teamNameLabel);
             this.Controls.Add(this.headerLabel);
-            this.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.Font = new System.Drawing.Font("Microsoft YaHei UI", 9F);
             this.Name = "CreateTeamForm";
             this.Text = "Create Team";
             this.addNewMemberBox.ResumeLayout(false);
             this.addNewMemberBox.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         #endregion

@@ -78,6 +78,9 @@
         <Compile Include="TournamentViewerForm.Designer.cs">
           <DependentUpon>TournamentViewerForm.cs</DependentUpon>
         </Compile>
+        <EmbeddedResource Include="CreateTeamForm.resx">
+          <DependentUpon>CreateTeamForm.cs</DependentUpon>
+        </EmbeddedResource>
         <EmbeddedResource Include="CreateTournamentForm.resx">
           <DependentUpon>CreateTournamentForm.cs</DependentUpon>
         </EmbeddedResource>

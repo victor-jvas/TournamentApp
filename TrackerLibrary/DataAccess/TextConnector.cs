@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using TrackerLibrary.DataAccess.Text;
 using TrackerLibrary.Models;
 
-namespace TrackerLibrary.DataAccess.Text
+namespace TrackerLibrary.DataAccess
 {
     public class TextConnector : IDataConnection
     {
         private const string PrizesFile = "PrizeModels.csv";
         
-        //TODO - Implement the function to save to text file
         public PrizeModel CreatePrize(PrizeModel model)
         {
             List<PrizeModel> prizes = PrizesFile.FullFilePath().LoadFile().ConvertToPrizeModels();
@@ -27,6 +27,11 @@ namespace TrackerLibrary.DataAccess.Text
 
             return model;
 
+        }
+
+        public PersonModel CreatePerson(PersonModel personModel)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
