@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
 using TrackerLibrary;
@@ -76,6 +77,32 @@ namespace TrackerUI
             
             if(prize == null) return;
             prizesList.Remove(prize);
+        }
+
+        private void createTournamentButton_Click(object sender, EventArgs e)
+        {
+            var tournament = new TournamentModel();
+            var validFee = decimal.TryParse(entryFeeValue.Text, out var fee);
+
+            if (!validFee)
+            {
+                MessageBox.Show(
+                    "Insert a valid entry fee",
+                    "Invalid Fee",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+                return;
+            }
+
+            tournament.TournamentName = tournamentNameValue.Text;
+            tournament.EntryFee = fee;
+            tournament.EnteredTeams = new List<TeamModel>(selectedTeams);
+            tournament.Prizes = new List<PrizeModel>(prizesList);
+            
+            TournamentLogic.CreateRounds(tournament);
+
+            GlobalConfig.Connection.CreateTournament(tournament);
         }
     }
 }

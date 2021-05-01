@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using Dapper;
@@ -10,7 +8,7 @@ namespace TrackerLibrary.DataAccess
 {
     public class SqlConnector : IDataConnection
     {
-        private const string db = "Tournaments";
+        private const string Db = "Tournaments";
         
         /// <summary>
         /// Saves a new prize to the database
@@ -20,7 +18,7 @@ namespace TrackerLibrary.DataAccess
         public PrizeModel CreatePrize(PrizeModel model)
         {
             
-            using (var connection = new System.Data.SqlClient.SqlConnection(GlobalConfig.CnnString(db)))
+            using (var connection = new System.Data.SqlClient.SqlConnection(GlobalConfig.CnnString(Db)))
             {
                 var p = new DynamicParameters();
                 p.Add("@PlaceNumber", model.PlaceNumber);
@@ -39,7 +37,7 @@ namespace TrackerLibrary.DataAccess
 
         public PersonModel CreatePerson(PersonModel model)
         {
-            using (var connection = new System.Data.SqlClient.SqlConnection(GlobalConfig.CnnString(db)))
+            using (var connection = new System.Data.SqlClient.SqlConnection(GlobalConfig.CnnString(Db)))
             {
                 var p = new DynamicParameters();
                 p.Add("@FirstName", model.FirstName);
@@ -58,7 +56,7 @@ namespace TrackerLibrary.DataAccess
 
         public TeamModel CreateTeam(TeamModel model)
         {
-            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(GlobalConfig.CnnString(db)))
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(GlobalConfig.CnnString(Db)))
             {
                 var p = new DynamicParameters();
                 p.Add("@TeamName", model.TeamName);
@@ -84,7 +82,7 @@ namespace TrackerLibrary.DataAccess
         public BindingList<PersonModel> GetPerson_All()
         {
             BindingList<PersonModel> output;
-            using (var connection = new System.Data.SqlClient.SqlConnection(GlobalConfig.CnnString(db)))
+            using (var connection = new System.Data.SqlClient.SqlConnection(GlobalConfig.CnnString(Db)))
             {
                 output = new BindingList<PersonModel>(connection.Query<PersonModel>("dbo.People_GetAll").ToList());
             }
@@ -95,12 +93,111 @@ namespace TrackerLibrary.DataAccess
         public BindingList<TeamModel> getTeam_All()
         {
             BindingList<TeamModel> output;
-            using (var connection = new System.Data.SqlClient.SqlConnection(GlobalConfig.CnnString(db)))
+            using (var connection = new System.Data.SqlClient.SqlConnection(GlobalConfig.CnnString(Db)))
             {
                 output = new BindingList<TeamModel>(connection.Query<TeamModel>("select * from dbo.Teams").ToList());
             }
 
             return output;
+        }
+
+        public TournamentModel CreateTournament(TournamentModel model)
+        {
+            using (var connection = new System.Data.SqlClient.SqlConnection(GlobalConfig.CnnString(Db)))
+            {
+                SaveTournament(model, connection);
+                
+                SaveTournamentTeams(model, connection);
+                
+                SaveTournamentPrizes(model, connection);
+
+                SaveTournamentRounds(model, connection);
+                
+                return model;
+            }
+        }
+
+        private void SaveTournamentRounds(TournamentModel model, IDbConnection connection)
+        {
+            foreach (var round in model.Rounds)
+            {
+                foreach (var match in round)
+                {
+                    var p = new DynamicParameters();
+                    p.Add("@MatchupRound", match.MatchupRound);
+                    p.Add("@TournamentId", model.Id);
+                    p.Add("@id", 0, dbType: DbType.Int32, ParameterDirection.Output);
+
+                    connection.Execute("dbo.spMatchups_Insert", p, commandType: CommandType.StoredProcedure);
+
+                    match.Id = p.Get<int>("@id");
+
+                    foreach (var matchEntry in match.Entries)
+                    {
+                        p = new DynamicParameters();
+                        p.Add("@MatchupId", match.Id);
+                        if (matchEntry.ParentMatchup != null)
+                        {
+                            p.Add("@ParentMatchupId", matchEntry.ParentMatchup.Id);
+                        }
+                        else
+                        {
+                            p.Add("@ParentMatchupId", null);
+                        }
+                        if (matchEntry.TeamCompeting != null)
+                        {
+                            p.Add("@TeamCompetingId", matchEntry.TeamCompeting.Id);
+                        }
+                        else
+                        {
+                            p.Add("@TeamCompetingId", null);
+                        }
+                        p.Add("@id", 0, dbType: DbType.Int32, ParameterDirection.Output);
+
+                        connection.Execute("dbo.spMatchupsEntries_Insert", p, commandType: CommandType.StoredProcedure);
+
+                        matchEntry.Id = p.Get<int>("@id");
+                    }
+                }
+            }
+        }
+
+        private void SaveTournament(TournamentModel model, IDbConnection connection)
+        {
+            var p = new DynamicParameters();
+            p.Add("@TournamentName", model.TournamentName);
+            p.Add("@EntryFee", model.EntryFee);
+            p.Add("@id", 0, dbType: DbType.Int32, ParameterDirection.Output);
+
+            connection.Execute("dbo.spTournaments_Insert", p, commandType: CommandType.StoredProcedure);
+
+            model.Id = p.Get<int>("@id");
+        }
+
+        private void SaveTournamentTeams(TournamentModel model, IDbConnection connection)
+        {
+            foreach (var team in model.EnteredTeams)
+            {
+                var p = new DynamicParameters();
+                p.Add("@TournamentId", model.Id);
+                p.Add("@TeamId", team.Id);
+                p.Add("@id", 0, dbType: DbType.Int32, ParameterDirection.Output);
+
+                connection.Execute("dbo.spTournamentsEntries_Insert", p, commandType: CommandType.StoredProcedure);
+            }
+        }
+
+        private void SaveTournamentPrizes(TournamentModel model, IDbConnection connection)
+        {
+            foreach (var prize in model.Prizes)
+            {
+                var p = new DynamicParameters();
+                p.Add("@TournamentId", model.Id);
+                p.Add("@PrizeId", prize.Id);
+                p.Add("@id", 0, dbType: DbType.Int32, ParameterDirection.Output);
+                    
+                connection.Execute("dbo.spTournamentsPrizes_Insert", p, commandType: CommandType.StoredProcedure);
+            }
         }
     }
 }

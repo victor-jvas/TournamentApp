@@ -16,5 +16,7 @@
         /// Represents the matchup that this team came from as winner
         /// </summary>
         public MatchupModel ParentMatchup { get; set; }
+
+        public int Id { get; set; }
     }
 }
