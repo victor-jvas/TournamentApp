@@ -70,5 +70,10 @@ namespace TrackerLibrary.DataAccess
         {
             throw new System.NotImplementedException();
         }
+
+        public BindingList<TournamentModel> getTournament_All()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

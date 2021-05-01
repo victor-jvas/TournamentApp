@@ -14,3 +14,4 @@ D:\Dev\GitRepos\TournamentApp\TrackerUI\obj\Debug\TrackerUI.csproj.CopyComplete
 D:\Dev\GitRepos\TournamentApp\TrackerUI\obj\Debug\TrackerUI.exe
 D:\Dev\GitRepos\TournamentApp\TrackerUI\obj\Debug\TrackerUI.pdb
 D:\Dev\GitRepos\TournamentApp\TrackerUI\obj\Debug\TrackerUI.CreateTeamForm.resources
+D:\Dev\GitRepos\TournamentApp\TrackerUI\obj\Debug\TrackerUI.TournamentDashBoardForm.resources

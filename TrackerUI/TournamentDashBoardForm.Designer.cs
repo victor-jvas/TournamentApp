@@ -39,7 +39,7 @@ namespace TrackerUI
             // headerLabel
             // 
             this.headerLabel.AutoSize = true;
-            this.headerLabel.Font = new System.Drawing.Font("Microsoft YaHei UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.headerLabel.Font = new System.Drawing.Font("Microsoft YaHei UI", 18F, System.Drawing.FontStyle.Bold);
             this.headerLabel.ForeColor = System.Drawing.Color.Coral;
             this.headerLabel.Location = new System.Drawing.Point(72, 33);
             this.headerLabel.Name = "headerLabel";
@@ -49,7 +49,7 @@ namespace TrackerUI
             // 
             // loadExistingTournamentDropDown
             // 
-            this.loadExistingTournamentDropDown.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.loadExistingTournamentDropDown.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F);
             this.loadExistingTournamentDropDown.FormattingEnabled = true;
             this.loadExistingTournamentDropDown.Location = new System.Drawing.Point(78, 135);
             this.loadExistingTournamentDropDown.Name = "loadExistingTournamentDropDown";
@@ -59,7 +59,7 @@ namespace TrackerUI
             // loadExistingTournamentLabel
             // 
             this.loadExistingTournamentLabel.AutoSize = true;
-            this.loadExistingTournamentLabel.Font = new System.Drawing.Font("Microsoft YaHei UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.loadExistingTournamentLabel.Font = new System.Drawing.Font("Microsoft YaHei UI", 15.75F);
             this.loadExistingTournamentLabel.ForeColor = System.Drawing.Color.Coral;
             this.loadExistingTournamentLabel.Location = new System.Drawing.Point(86, 104);
             this.loadExistingTournamentLabel.Name = "loadExistingTournamentLabel";
@@ -72,10 +72,10 @@ namespace TrackerUI
             // 
             this.loadTournamentButton.AutoSize = true;
             this.loadTournamentButton.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
-            this.loadTournamentButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.loadTournamentButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int) (((byte) (64)))), ((int) (((byte) (64)))), ((int) (((byte) (64)))));
             this.loadTournamentButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gainsboro;
             this.loadTournamentButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.loadTournamentButton.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.loadTournamentButton.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F);
             this.loadTournamentButton.ForeColor = System.Drawing.Color.Coral;
             this.loadTournamentButton.Location = new System.Drawing.Point(145, 170);
             this.loadTournamentButton.Name = "loadTournamentButton";
@@ -88,10 +88,10 @@ namespace TrackerUI
             // 
             this.createTournamentButton.AutoSize = true;
             this.createTournamentButton.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
-            this.createTournamentButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.createTournamentButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int) (((byte) (64)))), ((int) (((byte) (64)))), ((int) (((byte) (64)))));
             this.createTournamentButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gainsboro;
             this.createTournamentButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.createTournamentButton.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.createTournamentButton.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F);
             this.createTournamentButton.ForeColor = System.Drawing.Color.Coral;
             this.createTournamentButton.Location = new System.Drawing.Point(139, 209);
             this.createTournamentButton.Name = "createTournamentButton";
@@ -99,8 +99,9 @@ namespace TrackerUI
             this.createTournamentButton.TabIndex = 16;
             this.createTournamentButton.Text = "Create Tournament";
             this.createTournamentButton.UseVisualStyleBackColor = true;
+            this.createTournamentButton.Click += new System.EventHandler(this.createTournamentButton_Click);
             // 
-            // TournamentDashBoard
+            // TournamentDashBoardForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 28F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -111,12 +112,11 @@ namespace TrackerUI
             this.Controls.Add(this.loadExistingTournamentDropDown);
             this.Controls.Add(this.loadExistingTournamentLabel);
             this.Controls.Add(this.headerLabel);
-            this.Font = new System.Drawing.Font("Microsoft YaHei UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.Name = "TournamentDashBoard";
+            this.Font = new System.Drawing.Font("Microsoft YaHei UI", 15.75F);
+            this.Name = "TournamentDashBoardForm";
             this.Text = "Tournament Dashboard";
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         #endregion

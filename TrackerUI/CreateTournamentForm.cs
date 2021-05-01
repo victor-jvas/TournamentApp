@@ -95,6 +95,17 @@ namespace TrackerUI
                 return;
             }
 
+            if (tournamentNameValue.Text.Length < 1)
+            {
+                MessageBox.Show(
+                    "Insert a valid name",
+                    "Invalid Name",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+                return;
+            }
+
             tournament.TournamentName = tournamentNameValue.Text;
             tournament.EntryFee = fee;
             tournament.EnteredTeams = new List<TeamModel>(selectedTeams);
@@ -103,6 +114,8 @@ namespace TrackerUI
             TournamentLogic.CreateRounds(tournament);
 
             GlobalConfig.Connection.CreateTournament(tournament);
+            
+            this.Close();
         }
     }
 }
