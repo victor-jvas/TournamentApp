@@ -91,5 +91,16 @@ namespace TrackerLibrary.DataAccess
 
             return output;
         }
+
+        public BindingList<TeamModel> getTeam_All()
+        {
+            BindingList<TeamModel> output;
+            using (var connection = new System.Data.SqlClient.SqlConnection(GlobalConfig.CnnString(db)))
+            {
+                output = new BindingList<TeamModel>(connection.Query<TeamModel>("select * from dbo.Teams").ToList());
+            }
+
+            return output;
+        }
     }
 }

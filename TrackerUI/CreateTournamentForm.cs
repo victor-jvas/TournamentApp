@@ -1,12 +1,81 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.ComponentModel;
+using System.Windows.Forms;
+using TrackerLibrary;
+using TrackerLibrary.Models;
 
 namespace TrackerUI
 {
-    public partial class CreateTournamentForm : Form
+    public partial class CreateTournamentForm : Form, IPrizeRequester, ITeamRequester
     {
+        private BindingList<TeamModel> availableTeams = GlobalConfig.Connection.getTeam_All();
+        private BindingList<TeamModel> selectedTeams = new BindingList<TeamModel>();
+        private BindingList<PrizeModel> prizesList = new BindingList<PrizeModel>();
         public CreateTournamentForm()
         {
             InitializeComponent();
+
+            WireUpLists();
+        }
+
+        private void WireUpLists()
+        {
+            selectTeamDropDown.DataSource = availableTeams;
+            selectTeamDropDown.DisplayMember = "TeamName";
+
+            tournamentPlayersListBox.DataSource = selectedTeams;
+            tournamentPlayersListBox.DisplayMember = "TeamName";
+
+            prizeListBox.DataSource = prizesList;
+            prizeListBox.DisplayMember = "PlaceName";
+        }
+
+        private void addTeamButton_Click(object sender, EventArgs e)
+        {
+            var team = (TeamModel) selectTeamDropDown.SelectedItem;
+
+            if (team == null) return;
+            selectedTeams.Add(team);
+            availableTeams.Remove(team);
+        }
+
+        private void createPrizeButton_Click(object sender, EventArgs e)
+        {
+            var prizeForm = new CreatePrizeForm(this);
+            prizeForm.Show();
+        }
+
+        public void PrizeComplete(PrizeModel model)
+        {
+            prizesList.Add(model);
+        }
+
+        private void createNewTeamLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var teamForm = new CreateTeamForm(this);
+            teamForm.Show();
+        }
+
+        public void TeamComplete(TeamModel model)
+        {
+            availableTeams.Add(model);
+        }
+
+        private void removeSelectedPlayersButton_Click(object sender, EventArgs e)
+        {
+            var team = (TeamModel) tournamentPlayersListBox.SelectedItem;
+
+            if (team == null) return;
+            selectedTeams.Remove(team);
+            availableTeams.Add(team);
+        }
+
+        private void removeSelectedPrizeButton_Click(object sender, EventArgs e)
+        {
+            var prize = (PrizeModel) prizeListBox.SelectedItem;
+            
+            if(prize == null) return;
+            prizesList.Remove(prize);
         }
     }
 }

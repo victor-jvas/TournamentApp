@@ -28,6 +28,7 @@
             double prizePercentageValue = 0;
             double.TryParse(prizePercentage, out prizePercentageValue);
             PrizePercentage = prizePercentageValue;
+            
         }
     }
 }

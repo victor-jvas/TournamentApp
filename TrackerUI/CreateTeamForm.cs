@@ -9,24 +9,16 @@ namespace TrackerUI
 {
     public partial class CreateTeamForm : Form
     {
+        private ITeamRequester callingForm;
         private BindingList<PersonModel> availableTeamMembers = GlobalConfig.Connection.GetPerson_All();
         private BindingList<PersonModel> selectedTeamMembers = new BindingList<PersonModel>(); 
-        public CreateTeamForm()
+        public CreateTeamForm(ITeamRequester caller)
         {
             InitializeComponent();
             
-            //CreateSampleData();
+            callingForm = caller;
             
             WireUpLists();
-        }
-
-        private void CreateSampleData()
-        {
-            availableTeamMembers.Add(new PersonModel("Tom", "Bombaldi", "", ""));
-            availableTeamMembers.Add(new PersonModel("Aragorn", "Lotro", "", ""));
-            
-            selectedTeamMembers.Add(new PersonModel("Adams", "Safira", "", ""));
-            selectedTeamMembers.Add(new PersonModel("Rose", "Ruby", "", ""));
         }
 
         private void WireUpLists()
@@ -106,11 +98,10 @@ namespace TrackerUI
                 TeamName = teamNameValue.Text, TeamMembers = new List<PersonModel>(selectedTeamMembers)
             };
 
-            teamModel = GlobalConfig.Connection.CreateTeam(teamModel);
+            GlobalConfig.Connection.CreateTeam(teamModel);
             
-            // TODO - reset the form after
-
-
+            callingForm.TeamComplete(teamModel);
+            this.Close();
         }
     }
 }
