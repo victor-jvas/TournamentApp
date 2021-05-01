@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using TrackerLibrary.DataAccess.Text;
 using TrackerLibrary.Models;
@@ -8,6 +9,7 @@ namespace TrackerLibrary.DataAccess
     public class TextConnector : IDataConnection
     {
         private const string PrizesFile = "PrizeModels.csv";
+        private const string PeopleFile = "PersonModels.csv";
         
         public PrizeModel CreatePrize(PrizeModel model)
         {
@@ -31,7 +33,32 @@ namespace TrackerLibrary.DataAccess
 
         public PersonModel CreatePerson(PersonModel personModel)
         {
+            List<PersonModel> people = PeopleFile.FullFilePath().LoadFile().ConvertToPersonModels();
+
+            int currentId = 1;
+
+            if (people.Count > 0)
+            {
+                currentId = people.OrderByDescending(x => x.Id).First().Id + 1;
+            }
+
+            personModel.Id = currentId;
+            
+            people.Add(personModel);
+
+            people.SaveToPeopleFile(PeopleFile);
+
+            return personModel;
+        }
+
+        public TeamModel CreateTeam(TeamModel model)
+        {
             throw new System.NotImplementedException();
+        }
+
+        public BindingList<PersonModel> GetPerson_All()
+        {
+            return new BindingList<PersonModel>(PeopleFile.FullFilePath().LoadFile().ConvertToPersonModels());
         }
     }
 }

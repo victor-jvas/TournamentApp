@@ -2,6 +2,11 @@
 {
     public class PersonModel
     {
+
+        public PersonModel()
+        {
+            
+        }
         public PersonModel(string firstNameValue, string lastNameValue, string emailValue, string cellphoneValue)
         {
             FirstName = firstNameValue;
@@ -18,5 +23,13 @@
         public string EmailAddress { get; set; }
 
         public string CellPhoneNumber { get; set; }
+
+        public string FullName
+        {
+            get
+            {
+                return $"{FirstName} {LastName}";
+            }
+        }
     }
 }

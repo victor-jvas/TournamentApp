@@ -1,4 +1,6 @@
-﻿using TrackerLibrary.Models;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
+using TrackerLibrary.Models;
 
 namespace TrackerLibrary.DataAccess
 {
@@ -6,5 +8,7 @@ namespace TrackerLibrary.DataAccess
     {
         PrizeModel CreatePrize(PrizeModel model);
         PersonModel CreatePerson(PersonModel personModel);
+        TeamModel CreateTeam(TeamModel model);
+        BindingList<PersonModel> GetPerson_All();
     }
 }
