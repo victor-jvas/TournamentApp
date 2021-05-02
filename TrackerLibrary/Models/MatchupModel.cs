@@ -12,5 +12,35 @@ namespace TrackerLibrary.Models
         public int WinnerId { get; set; }
         public int MatchupRound { get; set; }
         public int Id { get; set; }
+
+        public string DisplayName
+        {
+            get
+            {
+                var result = "";
+                
+                foreach (var m in Entries)
+                {
+                    if (m.TeamCompeting != null)
+                    {
+                        if (result.Length == 0)
+                        {
+                            result = m.TeamCompeting.TeamName;
+                        }
+                        else
+                        {
+                            result += $" vs. {m.TeamCompeting.TeamName}";
+                        }
+                    }
+                    else
+                    {
+                        result = "To be decided.";
+                        break;
+                    }
+                }
+
+                return result;
+            }
+        }
     }
 }

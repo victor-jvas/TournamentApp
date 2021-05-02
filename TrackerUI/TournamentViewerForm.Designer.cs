@@ -47,7 +47,7 @@
             // 
             // headerLabel
             // 
-            this.headerLabel.Font = new System.Drawing.Font("Microsoft YaHei UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.headerLabel.Font = new System.Drawing.Font("Microsoft YaHei UI", 18F, System.Drawing.FontStyle.Bold);
             this.headerLabel.ForeColor = System.Drawing.Color.Coral;
             this.headerLabel.Location = new System.Drawing.Point(12, 29);
             this.headerLabel.Name = "headerLabel";
@@ -57,7 +57,7 @@
             // 
             // tournamentNameLabel
             // 
-            this.tournamentNameLabel.Font = new System.Drawing.Font("Microsoft YaHei UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.tournamentNameLabel.Font = new System.Drawing.Font("Microsoft YaHei UI", 18F);
             this.tournamentNameLabel.ForeColor = System.Drawing.Color.Coral;
             this.tournamentNameLabel.Location = new System.Drawing.Point(182, 29);
             this.tournamentNameLabel.Name = "tournamentNameLabel";
@@ -67,7 +67,7 @@
             // 
             // roundLabel
             // 
-            this.roundLabel.Font = new System.Drawing.Font("Microsoft YaHei UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.roundLabel.Font = new System.Drawing.Font("Microsoft YaHei UI", 18F);
             this.roundLabel.ForeColor = System.Drawing.Color.Coral;
             this.roundLabel.Location = new System.Drawing.Point(12, 79);
             this.roundLabel.Name = "roundLabel";
@@ -82,10 +82,11 @@
             this.roundDropDown.Name = "roundDropDown";
             this.roundDropDown.Size = new System.Drawing.Size(121, 24);
             this.roundDropDown.TabIndex = 1;
+            this.roundDropDown.SelectedIndexChanged += new System.EventHandler(this.roundDropDown_SelectedIndexChanged);
             // 
             // unplayedOnlyCheckBox
             // 
-            this.unplayedOnlyCheckBox.Font = new System.Drawing.Font("Microsoft YaHei UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.unplayedOnlyCheckBox.Font = new System.Drawing.Font("Microsoft YaHei UI", 10F);
             this.unplayedOnlyCheckBox.ForeColor = System.Drawing.Color.Coral;
             this.unplayedOnlyCheckBox.Location = new System.Drawing.Point(114, 116);
             this.unplayedOnlyCheckBox.Name = "unplayedOnlyCheckBox";
@@ -93,6 +94,7 @@
             this.unplayedOnlyCheckBox.TabIndex = 2;
             this.unplayedOnlyCheckBox.Text = "Unplayed Only";
             this.unplayedOnlyCheckBox.UseVisualStyleBackColor = true;
+            this.unplayedOnlyCheckBox.CheckedChanged += new System.EventHandler(this.unplayedOnlyCheckBox_CheckedChanged);
             // 
             // matchupListBox
             // 
@@ -103,21 +105,23 @@
             this.matchupListBox.Name = "matchupListBox";
             this.matchupListBox.Size = new System.Drawing.Size(216, 178);
             this.matchupListBox.TabIndex = 3;
+            this.matchupListBox.SelectedIndexChanged += new System.EventHandler(this.matchupListBox_SelectedIndexChanged);
             // 
             // teamOneNameLabel
             // 
-            this.teamOneNameLabel.Font = new System.Drawing.Font("Microsoft YaHei UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.teamOneNameLabel.AutoSize = true;
+            this.teamOneNameLabel.Font = new System.Drawing.Font("Microsoft YaHei UI", 18F);
             this.teamOneNameLabel.ForeColor = System.Drawing.Color.Coral;
             this.teamOneNameLabel.Location = new System.Drawing.Point(287, 146);
             this.teamOneNameLabel.Name = "teamOneNameLabel";
-            this.teamOneNameLabel.Size = new System.Drawing.Size(160, 31);
+            this.teamOneNameLabel.Size = new System.Drawing.Size(159, 31);
             this.teamOneNameLabel.TabIndex = 0;
             this.teamOneNameLabel.Text = "<team one>";
             this.teamOneNameLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // scoreTeamOneLabel
             // 
-            this.scoreTeamOneLabel.Font = new System.Drawing.Font("Microsoft YaHei UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.scoreTeamOneLabel.Font = new System.Drawing.Font("Microsoft YaHei UI", 18F);
             this.scoreTeamOneLabel.ForeColor = System.Drawing.Color.Coral;
             this.scoreTeamOneLabel.Location = new System.Drawing.Point(287, 177);
             this.scoreTeamOneLabel.Name = "scoreTeamOneLabel";
@@ -135,18 +139,19 @@
             // 
             // teamTwoNameLabel
             // 
-            this.teamTwoNameLabel.Font = new System.Drawing.Font("Microsoft YaHei UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.teamTwoNameLabel.AutoSize = true;
+            this.teamTwoNameLabel.Font = new System.Drawing.Font("Microsoft YaHei UI", 18F);
             this.teamTwoNameLabel.ForeColor = System.Drawing.Color.Coral;
             this.teamTwoNameLabel.Location = new System.Drawing.Point(287, 249);
             this.teamTwoNameLabel.Name = "teamTwoNameLabel";
-            this.teamTwoNameLabel.Size = new System.Drawing.Size(160, 31);
+            this.teamTwoNameLabel.Size = new System.Drawing.Size(158, 31);
             this.teamTwoNameLabel.TabIndex = 0;
             this.teamTwoNameLabel.Text = "<team two>";
             this.teamTwoNameLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // scoreTeamTwoLabel
             // 
-            this.scoreTeamTwoLabel.Font = new System.Drawing.Font("Microsoft YaHei UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.scoreTeamTwoLabel.Font = new System.Drawing.Font("Microsoft YaHei UI", 18F);
             this.scoreTeamTwoLabel.ForeColor = System.Drawing.Color.Coral;
             this.scoreTeamTwoLabel.Location = new System.Drawing.Point(287, 280);
             this.scoreTeamTwoLabel.Name = "scoreTeamTwoLabel";
@@ -164,7 +169,7 @@
             // 
             // vsLabel
             // 
-            this.vsLabel.Font = new System.Drawing.Font("Microsoft YaHei UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.vsLabel.Font = new System.Drawing.Font("Microsoft YaHei UI", 18F);
             this.vsLabel.ForeColor = System.Drawing.Color.Coral;
             this.vsLabel.Location = new System.Drawing.Point(338, 218);
             this.vsLabel.Name = "vsLabel";
@@ -176,10 +181,10 @@
             // scoreButton
             // 
             this.scoreButton.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
-            this.scoreButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.scoreButton.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int) (((byte) (64)))), ((int) (((byte) (64)))), ((int) (((byte) (64)))));
             this.scoreButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gainsboro;
             this.scoreButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.scoreButton.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.scoreButton.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F);
             this.scoreButton.ForeColor = System.Drawing.Color.Coral;
             this.scoreButton.Location = new System.Drawing.Point(481, 222);
             this.scoreButton.Name = "scoreButton";
@@ -187,6 +192,7 @@
             this.scoreButton.TabIndex = 5;
             this.scoreButton.Text = "Score";
             this.scoreButton.UseVisualStyleBackColor = true;
+            this.scoreButton.Click += new System.EventHandler(this.scoreButton_Click);
             // 
             // TournamentViewerForm
             // 
@@ -208,13 +214,12 @@
             this.Controls.Add(this.roundLabel);
             this.Controls.Add(this.tournamentNameLabel);
             this.Controls.Add(this.headerLabel);
-            this.Font = new System.Drawing.Font("Microsoft YaHei UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.Font = new System.Drawing.Font("Microsoft YaHei UI", 8.25F);
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "TournamentViewerForm";
             this.Text = "Tournament Viewer";
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         private System.Windows.Forms.Button scoreButton;

@@ -2,7 +2,6 @@
 using System.ComponentModel;
 using System.Data;
 using System.Linq;
-using System.Text.RegularExpressions;
 using Dapper;
 using TrackerLibrary.Models;
 
@@ -134,11 +133,11 @@ namespace TrackerLibrary.DataAccess
                     p.Add("@TournamentId", tournamentModel.Id);
                     
                     // Populate Tournament Prizes
-                    // TODO - Create Procedure PrizeGetByTournament
+                    
                     tournamentModel.Prizes = connection.Query<PrizeModel>("dbo.spPrizes_GetByTournament", p, commandType: CommandType.StoredProcedure).ToList();
                     
                     // Populate Tournament Teams
-                    // TODO - Create Procedure TeamGetByTournament
+                    
                     tournamentModel.EnteredTeams = connection.Query<TeamModel>("dbo.spTeams_GetByTournament", p, commandType: CommandType.StoredProcedure).ToList();
 
                     // Populate Team with Team members
@@ -147,7 +146,6 @@ namespace TrackerLibrary.DataAccess
                         p = new DynamicParameters();
                         
                         p.Add("@TeamId", team.Id);
-                        // TODO - Create Procedure MemberByTeam
                         team.TeamMembers =  connection.Query<PersonModel>("dbo.spTeamMembers_GetByTeam", p,
                             commandType: CommandType.StoredProcedure).ToList();
                     }
@@ -180,9 +178,9 @@ namespace TrackerLibrary.DataAccess
                             if (matchEntry.TeamCompetingId > 0)
                             {
                                 matchEntry.TeamCompeting =
-                                    allTeams.Where(x => x.Id == matchEntry.TeamCompeting.Id).First();
+                                    allTeams.Where(x => x.Id == matchEntry.TeamCompetingId).First();
                             }
-
+                            
                             if (matchEntry.ParentMatchupId > 0)
                             {
                                 matchEntry.ParentMatchup =
@@ -193,6 +191,7 @@ namespace TrackerLibrary.DataAccess
                     
                     List<MatchupModel> currRow = new List<MatchupModel>();
                     int currRound = 1;
+                    
                     foreach (var m in matchups)
                     {
                         if (m.MatchupRound > currRound)
@@ -208,6 +207,34 @@ namespace TrackerLibrary.DataAccess
             }
 
             return output;
+        }
+
+        public void UpdateMatchup(MatchupModel model)
+        {
+            using (var connection = new System.Data.SqlClient.SqlConnection(GlobalConfig.CnnString(Db)))
+            {
+                var p = new DynamicParameters();
+                if (model.Winner != null)
+                {
+                    p.Add("@id", model.Id);
+                    p.Add("@WinnerId", model.Winner.Id);
+
+                    connection.Execute("dbo.spMatchups_Update", p, commandType: CommandType.StoredProcedure);
+                    
+                }
+                foreach (var entry in model.Entries)
+                {
+                    if (entry.TeamCompeting != null)
+                    {
+                        p = new DynamicParameters();
+                        p.Add("@id", entry.Id);
+                        p.Add("@TeamCompetingId", entry.TeamCompeting.Id);
+                        p.Add("@Score", entry.Score);
+
+                        connection.Execute("dbo.spMatchupEntries_Update", p, commandType: CommandType.StoredProcedure);
+                    }
+                }
+            }
         }
 
         private void SaveTournamentRounds(TournamentModel model, IDbConnection connection)
@@ -247,7 +274,7 @@ namespace TrackerLibrary.DataAccess
                         }
                         p.Add("@id", 0, dbType: DbType.Int32, ParameterDirection.Output);
 
-                        connection.Execute("dbo.spMatchupsEntries_Insert", p, commandType: CommandType.StoredProcedure);
+                        connection.Execute("dbo.spMatchupEntries_Insert", p, commandType: CommandType.StoredProcedure);
 
                         matchEntry.Id = p.Get<int>("@id");
                     }

@@ -13,5 +13,6 @@ namespace TrackerLibrary.DataAccess
         BindingList<TeamModel> getTeam_All();
         TournamentModel CreateTournament(TournamentModel model);
         BindingList<TournamentModel> getTournament_All();
+        void UpdateMatchup(MatchupModel model);
     }
 }

@@ -55,6 +55,7 @@ namespace TrackerUI
             this.loadExistingTournamentDropDown.Name = "loadExistingTournamentDropDown";
             this.loadExistingTournamentDropDown.Size = new System.Drawing.Size(293, 29);
             this.loadExistingTournamentDropDown.TabIndex = 14;
+           
             // 
             // loadExistingTournamentLabel
             // 
@@ -83,6 +84,7 @@ namespace TrackerUI
             this.loadTournamentButton.TabIndex = 15;
             this.loadTournamentButton.Text = "Load Tournament";
             this.loadTournamentButton.UseVisualStyleBackColor = true;
+            this.loadTournamentButton.Click += new System.EventHandler(this.loadTournamentButton_Click);
             // 
             // createTournamentButton
             // 
