@@ -18,6 +18,76 @@ namespace TrackerLibrary
             CreateRounds(model, rounds);
         }
 
+        public static void UpdateTournamentResults(TournamentModel tournament)
+        {
+            var toScore = new List<MatchupModel>();
+            
+            foreach (var round in tournament.Rounds)
+            {
+                foreach (var roundMatch in round)
+                {
+                    if (roundMatch.Winner == null && (roundMatch.Entries.Any(x => x.Score != 0) || roundMatch.Entries.Count == 1))
+                    {
+                        toScore.Add(roundMatch);
+                    }
+                }
+            }
+
+            SetWinner(toScore);
+            
+            AdvanceBracketWinner(tournament, toScore);
+            
+            toScore.ForEach(x => GlobalConfig.Connection.UpdateMatchup(x));
+            
+        }
+
+        private static void AdvanceBracketWinner(TournamentModel tournament, List<MatchupModel> models)
+        {
+
+            foreach (var m in models)
+            {
+                foreach (var round in tournament.Rounds)
+                {
+                    foreach (var roundMatch in round)
+                    {
+                        foreach (var matchEntry in roundMatch.Entries)
+                        {
+                            if (matchEntry.ParentMatchup != null)
+                            {
+                                if (matchEntry.ParentMatchup.Id == m.Id)
+                                {
+                                    matchEntry.TeamCompeting = m.Winner;
+                                    GlobalConfig.Connection.UpdateMatchup(roundMatch);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private static void SetWinner(List<MatchupModel> toScore)
+        {
+
+            foreach (var matchupModel in toScore)
+            {
+                if (matchupModel.Entries.Count > 1)
+                {
+                    if (matchupModel.Entries[0].Score == matchupModel.Entries[1].Score)
+                    {
+                        throw new Exception("The match must have a winner.");
+                    }
+
+                    matchupModel.Winner = (matchupModel.Entries[0].Score > matchupModel.Entries[1].Score) ?
+                        matchupModel.Entries[0].TeamCompeting : matchupModel.Entries[1].TeamCompeting;
+                }
+                else
+                {
+                    matchupModel.Winner = matchupModel.Entries[0].TeamCompeting;
+                }
+            }
+        }
+
         private static void CreateRounds(TournamentModel tournament, int rounds)
         {
             var round = 2;
@@ -73,7 +143,6 @@ namespace TrackerLibrary
 
         private static int GetNumberOfByes(int rounds, int teamCount)
         {
-            var output = 0;
             var teamsNeeded = 1;
 
             for (int i = 1; i <= rounds; i++)
@@ -81,7 +150,7 @@ namespace TrackerLibrary
                 teamsNeeded *= 2;
             }
 
-            output = teamsNeeded - teamCount;
+            var output = teamsNeeded - teamCount;
             return output;
         }
 

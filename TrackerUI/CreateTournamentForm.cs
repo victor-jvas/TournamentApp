@@ -82,30 +82,11 @@ namespace TrackerUI
         private void createTournamentButton_Click(object sender, EventArgs e)
         {
             var tournament = new TournamentModel();
-            var validFee = decimal.TryParse(entryFeeValue.Text, out var fee);
 
-            if (!validFee)
-            {
-                MessageBox.Show(
-                    "Insert a valid entry fee",
-                    "Invalid Fee",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error
-                );
-                return;
-            }
+            if (!ValidateForm()) return;
 
-            if (tournamentNameValue.Text.Length < 1)
-            {
-                MessageBox.Show(
-                    "Insert a valid name",
-                    "Invalid Name",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error
-                );
-                return;
-            }
-
+            var fee = decimal.Parse(entryFeeValue.Text);
+            
             tournament.TournamentName = tournamentNameValue.Text;
             tournament.EntryFee = fee;
             tournament.EnteredTeams = new List<TeamModel>(selectedTeams);
@@ -116,6 +97,35 @@ namespace TrackerUI
             GlobalConfig.Connection.CreateTournament(tournament);
             
             this.Close();
+        }
+
+        private bool ValidateForm()
+        {
+            var validFee = decimal.TryParse(entryFeeValue.Text, out var fee);
+
+            if (!validFee)
+            {
+                MessageBox.Show(
+                    "Insert a valid entry fee",
+                    "Invalid Fee",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+                return false;
+            }
+
+            if (tournamentNameValue.Text.Length < 1)
+            {
+                MessageBox.Show(
+                    "Insert a valid name",
+                    "Invalid Name",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
+                return false;
+            }
+
+            return true;
         }
     }
 }

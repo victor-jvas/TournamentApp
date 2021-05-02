@@ -16,7 +16,7 @@ namespace TrackerLibrary.DataAccess
         /// </summary>
         /// <param name="model">The prize information.</param>
         /// <returns> THe prize information including the identifier.</returns>
-        public PrizeModel CreatePrize(PrizeModel model)
+        public void CreatePrize(PrizeModel model)
         {
             
             using (var connection = new System.Data.SqlClient.SqlConnection(GlobalConfig.CnnString(Db)))
@@ -31,12 +31,10 @@ namespace TrackerLibrary.DataAccess
                 connection.Execute("dbo.spPrizes_Insert", p, commandType: CommandType.StoredProcedure);
 
                 model.Id = p.Get<int>("@id");
-
-                return model;
             }
         }
 
-        public PersonModel CreatePerson(PersonModel model)
+        public void CreatePerson(PersonModel model)
         {
             using (var connection = new System.Data.SqlClient.SqlConnection(GlobalConfig.CnnString(Db)))
             {
@@ -50,12 +48,10 @@ namespace TrackerLibrary.DataAccess
                 connection.Execute("dbo.spPeople_Insert", p, commandType: CommandType.StoredProcedure);
 
                 model.Id = p.Get<int>("@id");
-
-                return model;
             }
         }
 
-        public TeamModel CreateTeam(TeamModel model)
+        public void CreateTeam(TeamModel model)
         {
             using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(GlobalConfig.CnnString(Db)))
             {
@@ -75,8 +71,6 @@ namespace TrackerLibrary.DataAccess
 
                     connection.Execute("dbo.spTeamMembers_Insert", p, commandType: CommandType.StoredProcedure);
                 }
-
-                return model;
             }
         }
 
@@ -102,7 +96,7 @@ namespace TrackerLibrary.DataAccess
             return output;
         }
 
-        public TournamentModel CreateTournament(TournamentModel model)
+        public void CreateTournament(TournamentModel model)
         {
             using (var connection = new System.Data.SqlClient.SqlConnection(GlobalConfig.CnnString(Db)))
             {
@@ -113,8 +107,6 @@ namespace TrackerLibrary.DataAccess
                 SaveTournamentPrizes(model, connection);
 
                 SaveTournamentRounds(model, connection);
-                
-                return model;
             }
         }
 
