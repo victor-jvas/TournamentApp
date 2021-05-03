@@ -71,6 +71,11 @@ namespace TrackerLibrary.DataAccess
             throw new System.NotImplementedException();
         }
 
+        public void CompleteTournament(TournamentModel model)
+        {
+            throw new System.NotImplementedException();
+        }
+
         public void UpdateMatchup(MatchupModel model)
         {
             throw new System.NotImplementedException();

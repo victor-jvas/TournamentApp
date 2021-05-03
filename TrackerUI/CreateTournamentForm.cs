@@ -96,18 +96,21 @@ namespace TrackerUI
 
             GlobalConfig.Connection.CreateTournament(tournament);
             
+            tournament.AlertUsersToNewRound();
+            var form = new TournamentViewerForm(tournament);
+            form.Show();
             this.Close();
         }
 
         private bool ValidateForm()
         {
-            var validFee = decimal.TryParse(entryFeeValue.Text, out var fee);
+            var validFee = decimal.TryParse(entryFeeValue.Text, out _);
 
             if (!validFee)
             {
                 MessageBox.Show(
-                    "Insert a valid entry fee",
-                    "Invalid Fee",
+                    @"Insert a valid entry fee",
+                    @"Invalid Fee",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error
                 );
@@ -117,8 +120,8 @@ namespace TrackerUI
             if (tournamentNameValue.Text.Length < 1)
             {
                 MessageBox.Show(
-                    "Insert a valid name",
-                    "Invalid Name",
+                    @"Insert a valid name",
+                    @"Invalid Name",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error
                 );

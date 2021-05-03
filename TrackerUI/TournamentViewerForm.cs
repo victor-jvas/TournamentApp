@@ -18,8 +18,21 @@ namespace TrackerUI
             InitializeComponent();
 
             tournament = tournamentModel;
+
+            tournament.OnTournamentComplete += Tournament_OnTournamentComplete;
             LoadFormData();
             LoadRounds();
+        }
+
+        private void Tournament_OnTournamentComplete(object sender, EventArgs e)
+        {
+            var winners = tournament.Rounds.Last().First().Winner;
+
+            MessageBox.Show(
+                $@"The tournament: {tournament.TournamentName} has been concluded." + 
+                $@"Congratulations to {winners.TeamName} for winning!",
+                @"Winner", MessageBoxButtons.OK);
+            this.Close();
         }
 
         private void LoadFormData()
@@ -203,35 +216,7 @@ namespace TrackerUI
                     }
                 }
             }
-
-            if (teamOneScore == teamTwoScore)
-            {
-                MessageBox.Show("The match must have a winner.");
-            }
-            else
-            {
-                m.Winner = (teamOneScore > teamTwoScore) ?  m.Entries[0].TeamCompeting : m.Entries[1].TeamCompeting;
-
-                foreach (var round in tournament.Rounds)
-                {
-                    foreach (var roundMatch in round)
-                    {
-                        foreach (var matchEntry in roundMatch.Entries)
-                        {
-                            if (matchEntry.ParentMatchup != null)
-                            {
-                                if (matchEntry.ParentMatchup.Id == m.Id)
-                                {
-                                    matchEntry.TeamCompeting = m.Winner;
-                                    GlobalConfig.Connection.UpdateMatchup(roundMatch);
-                                }
-                            }
-                        }
-                    }
-                }
-                
-                GlobalConfig.Connection.UpdateMatchup(m);
-            }
+            TournamentLogic.UpdateTournamentResults(tournament);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using TrackerLibrary.Models;
 
 namespace TrackerLibrary
@@ -20,6 +21,7 @@ namespace TrackerLibrary
 
         public static void UpdateTournamentResults(TournamentModel tournament)
         {
+            var startingRound = tournament.CheckCurrentRound();
             var toScore = new List<MatchupModel>();
             
             foreach (var round in tournament.Rounds)
@@ -38,7 +40,114 @@ namespace TrackerLibrary
             AdvanceBracketWinner(tournament, toScore);
             
             toScore.ForEach(x => GlobalConfig.Connection.UpdateMatchup(x));
+            var endingRound = tournament.CheckCurrentRound();
+
+            if (endingRound > startingRound)
+            {
+                tournament.AlertUsersToNewRound();
+            }
+        }
+
+        public static void AlertUsersToNewRound(this TournamentModel model)
+        {
+            var currentRoundCount = model.CheckCurrentRound();
+            var currentRound = model.Rounds.First(x => x.First().MatchupRound == currentRoundCount);
+
+            foreach (var matchup in currentRound)
+            {
+                foreach (var me in matchup.Entries)
+                {
+                    foreach (var member in me.TeamCompeting.TeamMembers)
+                    {
+                        AlertPersonToNewRound(member,
+                            matchup.Entries.FirstOrDefault(x => x.TeamCompeting != me.TeamCompeting));
+                    }
+                }
+            }
+        }
+
+        private static void AlertPersonToNewRound(PersonModel member, MatchupEntryModel adversary)
+        {
+            if (member.EmailAddress.Length == 0)
+            {
+                return;
+            }
+
+            var to = member.EmailAddress;
+            var subject = "";
+            var body = new StringBuilder();
+
+            if (adversary != null)
+            {
+                subject = $"You have a upcoming match against {adversary.TeamCompeting.TeamName}";
+
+                body.AppendLine("You have a new matchup");
+                body.Append("Adversary: ");
+                body.AppendLine(adversary.TeamCompeting.TeamName);
+                body.AppendLine();
+                body.AppendLine();
+                body.AppendLine("Good Match, have fun!");
+            }
+            else
+            {
+                subject = "You have a bye this round";
+                
+                body.AppendLine("Enjoy your round off!");
+                body.AppendLine("Have fun!");
+            }
+
+            EmailLogic.SendEmail(to, subject, body.ToString());
+        }
+
+        private static int CheckCurrentRound(this TournamentModel model)
+        {
+            var currentRound = 1;
+
+            foreach (var round in model.Rounds)
+            {
+                if (round.All(x => x.Winner != null))
+                {
+                    currentRound++;
+                }
+                else
+                {
+                    return currentRound;
+                }
+            }
+
+            CompleteTournament(model);
+
+            return --currentRound;
+        }
+
+        private static void CompleteTournament(TournamentModel tournament)
+        {
+            GlobalConfig.Connection.CompleteTournament(tournament);
             
+            //var winners = tournament.Rounds.Last().First().Winner;
+            
+            if (tournament.Prizes.Count > 0)
+            {
+                var totalIncome = (tournament.EnteredTeams.Count * tournament.EntryFee);
+                var firstPrize = tournament.Prizes.FirstOrDefault(x => x.PlaceNumber == 1);
+                
+                if (firstPrize != null)
+                {
+                    CalculatePayout(firstPrize, totalIncome);
+                }
+            }
+            tournament.CompleteTournamentCaller();
+        }
+
+        private static decimal CalculatePayout(PrizeModel prize, decimal totalIncome)
+        {
+            decimal payout = 0;
+
+            payout = prize.PrizeAmount > 0
+                ? prize.PrizeAmount
+                : decimal.Multiply(totalIncome, Convert.ToDecimal(prize.PrizePercentage / 100));
+
+            return payout;
         }
 
         private static void AdvanceBracketWinner(TournamentModel tournament, List<MatchupModel> models)

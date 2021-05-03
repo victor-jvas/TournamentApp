@@ -107,6 +107,8 @@ namespace TrackerLibrary.DataAccess
                 SaveTournamentPrizes(model, connection);
 
                 SaveTournamentRounds(model, connection);
+                
+                TournamentLogic.UpdateTournamentResults(model);
             }
         }
 
@@ -199,6 +201,18 @@ namespace TrackerLibrary.DataAccess
             }
 
             return output;
+        }
+
+        public void CompleteTournament(TournamentModel model)
+        {
+
+            using (var connection = new System.Data.SqlClient.SqlConnection(GlobalConfig.CnnString(Db)))
+            {
+                var p = new DynamicParameters();
+                p.Add("@id", model.Id);
+
+                connection.Execute("dbo.spTournaments_Finish", p, commandType: CommandType.StoredProcedure);
+            }
         }
 
         public void UpdateMatchup(MatchupModel model)
